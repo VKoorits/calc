@@ -1,0 +1,41 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    input {
+        width: 30px
+    }
+    </style>
+</head>
+<body>
+    <form>
+        Размер вектора <input name="vector_size" value="{{vector_size}}"><br>
+        <input type="radio" name="axis" value="1" {{checked1}}> 1-мерное<br>
+        <input type="radio" name="axis" value="2" {{checked2}}> 2-мерное<br>
+        ==========<br>
+        <input type="radio" name="type" value="direct" checked="checked"> прямое Фурье
+        <input type="radio" name="type" value="reverse"> обратное Фурье
+        <br>
+        <table>
+        {% for y in diap_y %}
+            <tr>
+            {%for x in diap_x %}
+                <td>
+                    <input name="r{{x}}-{{y}}"> + j*
+                    <input name="i{{x}}-{{y}}"> &nbsp; ; &nbsp;
+                </td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+        </table>
+        <br>
+        <input style="width:60px" type="submit" value="calc">
+    </form>
+    <br><br>
+    {% for answer in answers %}
+        {{ answer }}
+        <br>
+    {% endfor %}
+</body>
+</html>
